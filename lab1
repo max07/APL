@@ -1,0 +1,110 @@
+#include <iostream>
+#include <cstdlib>
+#include <stdio.h>
+
+using namespace std;
+
+int maxx=5;
+
+class ar
+{
+private:
+    int arr[5];
+
+public:
+    void ins(int pos, int num);
+    void populate();
+    void del(int pos);
+    void display();
+    int compare(int i,int j);
+    void srch(int num);
+};
+
+void ar::populate()
+{
+    for (int i=0;i<maxx;i++)
+    {
+        cout<<"\nEnter the element of the Array: ";
+        cin>>arr[i];
+	}
+}
+
+
+int ar::compare(int i,int j)
+{
+if(i==j)
+return 1;
+return 0;
+}
+
+
+void ar::del(int pos)
+{
+    for (int i=pos;i<maxx;i++)
+    {
+        arr[i]=arr[i + 1];
+    }
+    maxx=maxx-1;
+}
+
+void ar::display()
+{
+    for (int i=0;i<maxx;i++)
+        cout<<"\n"<<arr[i];
+}
+
+void ar::srch(int num)
+{
+    int f[5];
+    int j=0,c=0;
+    for (int i=0;i<maxx;i++)
+       {
+
+            if(num==arr[i])
+            {
+                f[j]=i;
+                j++;
+                c=1;
+            }
+
+       }
+       if (c==1)
+        {
+            cout<<"\n"<<num<<" found at location(s): ";
+            for(int i=0;i<j;i++)
+            cout<<" "<<f[i]+1;
+        }
+        else
+            cout<<"\nNot Found!";
+}
+
+
+void ar::ins(int pos,int num)
+{
+    ++maxx;
+    for (int i=pos;i<maxx;i++)
+    {
+        arr[i+1]=arr[i];
+    }
+    arr[pos]=num;
+}
+
+int main()
+{
+    int i,j,num,pos;
+    ar m;
+    m.populate();
+    cout<<endl;
+    m.display();
+    cout<<endl;
+    m.ins(4,8);
+    cout<<endl;
+    m.display();
+    cout<<endl;
+    m.del(4);
+    cout<<endl;
+    m.display();
+    cout<<endl;
+    m.srch(5);
+return 0;
+}
