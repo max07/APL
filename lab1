@@ -68,7 +68,7 @@ cout<<endl;
            if(m.arr[i]==m.arr[j])    //if same then delete
            {
                 m.del(j);
-                i--;
+                j--;
            }
         }
     }
