@@ -9,9 +9,11 @@ int maxx=0;
 class ar
 {
 public:
+
     int arr[100010];
     void populate();
-    void del(int pos);
+    int compare();
+    int del(int pos);
     void display();
 };
 
@@ -19,7 +21,7 @@ public:
 /* *** Take values from user *** */
 void ar::populate()
 {
-    cout<<"\nEnter the element of the Array: \n";
+
     for (int i=0;i<maxx;i++)
     {
 
@@ -27,9 +29,30 @@ void ar::populate()
 	}
 }
 
+int ar::compare()
+{
+
+//// *** Purging ***
+    for (int i=0;i<maxx;++i)
+    {
+        for (int j=i+1;j<maxx;++j)   // compare element with next element(s)
+        {
+           if(arr[i]==arr[j])   //if same then delete
+           {
+                del(j);
+                j--;
+           }
+        }
+    }
+////
+return 0;
+}
+
+
+
 
 /* *** Delete the Duplicates *** */
-void ar::del(int pos)
+int ar::del(int pos)
 {
     for (int i=pos;i<maxx;i++)
     {
@@ -38,6 +61,7 @@ void ar::del(int pos)
 
     }
     maxx=maxx-1;             // reducing size of array subsequently
+return 0;
 }
 
 /* *** Print Cuurent Data *** */
@@ -50,29 +74,20 @@ void ar::display()
 
 int main()
 {
+    //int *a;
     printf("\nEnter Size: ");  //Take size of array
     scanf("\n%d",&maxx);
-
+cout<<"\nEnter data to Insert:  \n";
     ar m;
+    //a=m.arr;
     m.populate();              // Take input
     cout<<endl;
     cout<<"\nInitial List: ";
     m.display();                //Display initial data
 cout<<endl;
 
-//// *** Purging ***
-    for (int i=0;i<maxx;++i)
-    {
-        for (int j=i+1;j<maxx;++j)   // compare element with next element(s)
-        {
-           if(m.arr[i]==m.arr[j])    //if same then delete
-           {
-                m.del(j);
-                j--;
-           }
-        }
-    }
-////
+    m.compare();   ////////************ PURGING
+
 
 cout<<endl;
 
