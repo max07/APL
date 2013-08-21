@@ -1,168 +1,190 @@
+#include <iostream>
+#include <cstdlib>
+#include <stdio.h>
 
-#include<iostream>
-#include<cstdlib>
+
+
 using namespace std;
-struct node{
-    int info;
-    struct node *next;
-};
-class ar{
-     node *list;
-    public:
-        ar();
+int maxx=0,maxx1=0;
 
-        void insert_at_end(int);
 
-        void delete_at_begining();
-
-        void delete_at_end();
-        void delete_before_node();
-        void delete_before_after_node(int);
-        node *find_before_node(node*);
-        void display();
-};
-ar::ar(){
-    list = NULL;
-}
-node *ar::find_before_node(node *p){
-    int count = 0;
-    int count1 = 0;
-    node *temp = new node;
-    temp = list;
-    while(temp!=p){
-        count++;
-        temp=temp->next;
-    }
-    temp = list;
-    while(count1<count-1){
-        count1++;
-        temp = temp->next;
-    }
-    return temp;
-}
-
-}
-void ar::insert_at_end(int data)
+/* A linked list node */
+struct node
 {
-    node *p = new node;
-    node *r = new node;
-    node *q = new node;
-    r = list;
-    p->info = data;
-    p->next = NULL;
-    if(list == NULL)'
+ int data;
+ struct node *next;
+};
+
+//typedef struct node node;
+
+node *start =NULL;
+
+class ar
+{
+public:
+//    int *arr=NULL;
+    void populate();
+    int compare();
+    //int del(int num);
+    void display();
+};
+
+
+void ar:: populate()
+{
+    int val;
+    node *p;
+    node *q;
+//    node *r=NULL;
+    p=NULL;
+    //cout<<"\nEnter elements: ";
+        while (maxx1--)
+    {
+        cin>>val;
+
+           if (p == NULL)
+           {
+
+            p=(struct node *) malloc(sizeof(struct node));
+            p->data = val;
+            p->next = NULL;
+            start=p;
+
+           }
+                else
+            {
+            q=(struct node *) malloc(sizeof(struct node));
+            q->data = val;
+            q->next = NULL;
+            p->next = q;
+            p=p->next;
+            }
+
+    }
+}
+
+
+int ar::compare()
+{
+
+//// *** Purging ***
+    node *x=start;
+    node *y=NULL;
+    while (x->next!=NULL)
+
+    {
+           y=x->next;
+    for (int i=0;i<maxx;++i)
+    {
+
+        for (int j=i+1;j<maxx;++j)   // compare element with next element(s)
         {
-        list = p;
+
+              if (x->data==y->data)    //if same then data
+           {
+            //del(y->data);
+
+                x->next=y->next;
+                y->next=NULL;
+                free(y);
+                y=x->next;
+                --j;
+                --maxx;
+           }
+           else if (y->next!=NULL)
+            y=y->next;
+
         }
-    else{
-        while(r->next!=NULL){
-            r = r->next;
-        }
-        r->next = p;
+
+         x=x->next;
+
     }
+    }
+////
+return 0;
 }
 
 
-
-void ar::delete_before_node(){
-    node *p = new node;
-    node *l = new node;
-    int data1;
-    bool isFound = false;
-    p = list;
-    cout<<"Enter the node: ";
-    cin>>data1;
-    if(p == NULL){
-        cout<<"\nList is Empty"<<endl;
-        exit(0);
-    }
-    while(p!=NULL){
-        if(p->info == data1){
-            isFound = true;
-            break;
+/*
+// Function to remove duplicates from a unsorted linked list
+int ar::del(int num)
+{
+    struct node *temp, *prev;
+    temp=start;
+    while(temp!=NULL)
+    {
+    if(temp->data==num)
+    {
+        if(temp==start)
+        {
+        start=temp->next;
+        free(temp);
+        return 1;
         }
-        l = p;
-        p = p->next;
-    }
-    if(isFound){
-        if(p == list){
-            cout<<"\nIt is the first element\n";
-        }else if(p == list->next){
-            list = p;
-            delete l;
-        }else{
-            find_before_node(l)->next = p;
-            delete l;
+        else
+        {
+        prev->next=temp->next;
+        free(temp);
+        maxx--;
+        return 1;
         }
     }
-}
-
-void ar::display(){
-    node *p = new node;
-    p = list;
-    if(list==NULL){
-        cout<<"\nNothing to Display\n";
-    }else{
-        cout<<"\nThe contents of list\n";
-        while(p!=NULL){
-            cout<<p->info<<endl;
-            p = p->next;
-        }
+    else
+    {
+        prev=temp;
+        temp= temp->next;
     }
-}
-int main(){
-    int choice;
-    ar ar;
-    while(1){
-        int data;
-        cout<<"\n1. Insert at the begining"<<endl;
-        cout<<"2. Insert at the end"<<endl;
-        cout<<"3. Insert before node"<<endl;
-        cout<<"4. Insert After node"<<endl;
-        cout<<"5. Delete first element"<<endl;
-        cout<<"6. Delete last element"<<endl;
-        cout<<"7. Delete before node"<<endl;
-        cout<<"8. Delete after node"<<endl;
-        cout<<"9. Display"<<endl;
-        cout<<"10. Exit"<<endl;
-        cout<<"Enter the option: ";
-        cin>>choice;
-        switch(choice){
-            case 1:
-                cout<<"\nEnter data to Insert: ";
-                cin>>data;
-                ar.insert_at_begining(data);
-                break;
-            case 2:
-                cout<<"Enter data to Insert: ";
-                cin>>data;
-                ar.insert_at_end(data);
-                break;
-            case 3:
-                ar.insert_before_node();
-                break;
-            case 4:
-                ar.insert_after_node();
-                break;
-            case 5:
-                ar.delete_at_begining();
-                break;
-            case 6:
-                ar.delete_at_end();
-                break;
-            case 7:
-                ar.delete_before_node();
-                break;
-            case 8:
-                //ar.delete_before_after_node(0);
-                break;
-            case 9:
-                ar.display();
-                break;
-            case 10:
-                exit(0);
-                break;
-        }
     }
     return 0;
+}
+
+*/
+
+
+
+
+void ar::display()
+{
+    node *start1=start;
+   if(start1 == NULL)
+    cout<<"\nNo data\n";
+   else
+   {
+        cout<<"\nThe elements are:  ";
+        while(start1!=NULL)
+        {
+            printf(" %d ",start1->data);
+            start1=start1->next;
+        }
+        cout<<"\n";
+   }
+
+}
+
+
+int main()
+{
+    //int *a;
+    printf("\nEnter Size: ");  //Take size of array
+    scanf("\n%d",&maxx);
+    maxx1=maxx;
+cout<<"\nEnter data to Insert:  \n";
+    ar m;
+    //a=m.arr;
+    m.populate();              // Take input
+    cout<<endl;
+    cout<<"\nInitial List: ";
+    m.display();                //Display initial data
+cout<<endl;
+
+ m.compare();   ////////************ PURGING
+
+
+cout<<endl;
+
+cout<<"\nPurged List : ";
+    m.display();                    // Display Final Data
+
+cout<<endl;
+return 0;
 }
