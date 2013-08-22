@@ -12,7 +12,12 @@ struct node
 };
 //typedef struct node node;
 node *start =NULL;
-
+/* ************************************************************
+Function Name:populate
+Return type:void
+Arguments :void
+Description:It fills the list with values provided 
+***************************************************************/
 void list:: populate()
 {
     int val;
@@ -45,43 +50,54 @@ void list:: populate()
 
     }
 }
-
+/* ************************************************************
+Function Name:purging
+Return type:void
+Arguments :void
+Description:compares the element with next element(s) and 
+                   deletes if same
+***************************************************************/
 
 void list::purging()
 {
-    cout<<"entered\n";
     node *x=start;
     node *y=start;
-    
-
-    cout<<"in main while\n";
-    
+        
     while(x->next!=NULL){
-    cout<<"inside outer for loop\n";
-        y=x->next;
-        while(y->next!=NULL) // compare element with next element(s)
+           y=x->next;
+        while(y->next!=NULL)
         {   
-	  cout<<"inside inner while loop\n";
-
-              if (x->data==y->data) //if same then data
-           {
-            //del(y->data);
+	   if (x->data==y->data) 
+           {             
               cout<< "inside if\n";
                 x->next=y->next;
                 y->next=NULL;
                 free(y);
-                y=x->next;
-                //--j;
+                y=x->next;               
            }
              else{
               y=y->next;
           }
           
     }
+    if(y->next==NULL){
+    if (x->data==y->data) //if same then data
+           {
+                cout<< "inside if\n";
+                x->next=NULL;
+                free(y);
+                return;
+             }
+    }
 x=x->next;
 }
 }
-
+/* ************************************************************
+Function Name:display
+Return type:void
+Arguments :void
+Description:Displays the values present in list at any instance
+***************************************************************/
 
 void list::display()
 {
@@ -99,7 +115,6 @@ void list::display()
         }
         cout<<"\n";
    }
-cout<<"coming out";
 }
 
 void list::del(int i){
