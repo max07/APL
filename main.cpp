@@ -14,6 +14,10 @@ int main()
     cin>>size;
     list m;
     
+    if (size<=0)
+    {return 0;}
+    else
+    {
     m.populate();             
     cout<<endl; 
     cout<<"Initial List: ";   
@@ -22,6 +26,6 @@ int main()
     cout<<"\nPurged List : ";
     m.display();    
     cout<<endl;               
-
+    }
 return 0;
 }
