@@ -60,27 +60,61 @@ Description:compares the element with next element(s) and
 
 void list::purging()
 {
+	//13  5  9  5  -13  2  3  -9  13  -9
     node *x=start;
     node *y=start;
+    node *z=start;
         
-    while(x->next!=NULL){
-           y=x->next;
-        while(y->next!=NULL)
-        {   
-	   if (x->data==y->data) 
-           {             
-              cout<< "inside if\n";
-                x->next=y->next;
-                y->next=NULL;
-                free(y);
-                y=x->next;               
-           }
-             else{
-              y=y->next;
-          }
+    if(x->next!=NULL)
+    {
+    		cout<<"\ninside1: \n";
           
+           		z=x->next;
+      while (x->next!=NULL)  
+        {   
+        //cout<<"\ninside while1: \n";
+	  
+	  cout<<"\nx:  "<<x->data<<" y:  "<< y->data <<" z:  "<< z->data;
+	   if (x->data==z->data) 
+           {             
+              cout<<"\ndata same\n";
+                if(z->next!=NULL) //MODIFIACTION 2
+                {
+                y->next=z->next;
+                cout<<"\ndata deleting is:  \n"<<z->data<<endl;
+                z->next=NULL;
+                free(z);
+                z=y->next; 
+                }
+                else
+                {
+                cout<<"\n**data deleting is:  \n"<<z->data<<endl;
+                y->next=NULL;
+                z->next=NULL;
+                free(z); 
+                x=x->next;             
+           	y=x;
+           	if (y->next!=NULL)
+          	z=y->next;
+          	}
+           }
+             	else if(z->next!=NULL)
+             	{
+                         
+                           z=z->next;
+                           y=y->next;
+                           cout<<"\n**"<<endl;
+                          // cout<<"\nz: "<< z->data <<" y:  "<< y->data;
+          	}
+          	else
+          	{
+          	cout<<"\n***\n"<<endl;
+          	x=x->next;
+          	y=x;
+          	z=x->next;
+          	}
     }
-    if(y->next==NULL){
+    /*if(y->next==NULL){
     if (x->data==y->data) //if same then data
            {
                 cout<< "inside if\n";
@@ -88,10 +122,12 @@ void list::purging()
                 free(y);
                 return;
              }
+		x=x->next;
     }
-x=x->next;
+*/
 }
 }
+
 /* ************************************************************
 Function Name:display
 Return type:void
@@ -119,5 +155,4 @@ void list::display()
 
 void list::del(int i){
 }
-
 
