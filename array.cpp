@@ -57,7 +57,7 @@ void list::purging(){
         for (int j=i+1;j<size;++j){
            if(arr[i]==arr[j]){
                 del(j);
-                j--;
+                i--;
            }
         }
     }
