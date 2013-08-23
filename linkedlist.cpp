@@ -60,72 +60,66 @@ Description:compares the element with next element(s) and
 
 void list::purging()
 {
-	//13  5  9  5  -13  2  3  -9  13  -9
+	
     node *x=start;
     node *y=start;
     node *z=start;
         
     if(x->next!=NULL)
     {
-    		cout<<"\ninside1: \n";
+    		
           
            		z=x->next;
       while (x->next!=NULL)  
         {   
-        //cout<<"\ninside while1: \n";
-	  
-	  cout<<"\nx:  "<<x->data<<" y:  "<< y->data <<" z:  "<< z->data;
-	   if (x->data==z->data) 
+           if (x->data==z->data) 
            {             
-              cout<<"\ndata same\n";
-                if(z->next!=NULL) //MODIFIACTION 2
+        
+                if(z->next!=NULL) 
                 {
                 y->next=z->next;
-                cout<<"\ndata deleting is:  \n"<<z->data<<endl;
                 z->next=NULL;
                 free(z);
                 z=y->next; 
                 }
                 else
                 {
-                cout<<"\n**data deleting is:  \n"<<z->data<<endl;
+                
+               if (y!=x)
+                
+                {
                 y->next=NULL;
-                z->next=NULL;
                 free(z); 
                 x=x->next;             
            	y=x;
            	if (y->next!=NULL)
           	z=y->next;
           	}
-           }
+          	else
+          	{
+          		x->next=NULL;
+          		y->next=NULL;
+          		y=x;
+          		
+          	}
+          	
+           	}
+           	}
              	else if(z->next!=NULL)
              	{
                          
                            z=z->next;
                            y=y->next;
-                           cout<<"\n**"<<endl;
-                          // cout<<"\nz: "<< z->data <<" y:  "<< y->data;
+                      
           	}
           	else
           	{
-          	cout<<"\n***\n"<<endl;
           	x=x->next;
           	y=x;
           	z=x->next;
           	}
     }
-    /*if(y->next==NULL){
-    if (x->data==y->data) //if same then data
-           {
-                cout<< "inside if\n";
-                x->next=NULL;
-                free(y);
-                return;
-             }
-		x=x->next;
-    }
-*/
-}
+  }
 }
 
 /* ************************************************************
